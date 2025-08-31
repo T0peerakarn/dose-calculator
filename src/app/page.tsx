@@ -2,17 +2,35 @@
 
 import { useState } from "react";
 
-import { Navigator } from "@/components";
-import { pages } from "@/constants";
+import {
+  Navigator,
+  Calculator,
+  AlterMedicine,
+  MedicineList,
+} from "@/components";
 
 const HomePage = () => {
   const [currentPageIdx, setCurrentPageIdx] = useState<number>(0);
+  const pages = [
+    {
+      name: "คำนวณขนาดยา",
+      component: Calculator,
+    },
+    {
+      name: "ป้อนข้อมูลยาใหม่",
+      component: AlterMedicine,
+    },
+    {
+      name: "รายชื่อยา",
+      component: MedicineList,
+    },
+  ];
 
   const renderPage = () => {
     const Component = pages[currentPageIdx].component;
 
     return (
-      <div className="w-full h-full p-8 bg-blue-200">
+      <div className="w-full h-full flex flex-col gap-y-4">
         <Component />
       </div>
     );

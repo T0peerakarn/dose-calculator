@@ -11,6 +11,7 @@ export const Button = ({ isToggle, ...props }: ButtonProps) => {
       className={`w-full py-4 rounded-xl cursor-pointer transition-all shadow-md ${
         isToggle ? "bg-teal-300" : "bg-teal-100 hover:bg-teal-200"
       }`}
+      {...props}
     >
       <p
         className={`w-full text-center text-lg ${
