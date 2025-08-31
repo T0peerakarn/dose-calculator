@@ -2,7 +2,8 @@ import { useState } from "react";
 import { mockMedications } from "@/constants";
 
 export const MedicineList = () => {
-  const [medications, setMedications] = useState<Medication[]>(mockMedications);
+  const [medications, _setMedications] =
+    useState<Medication[]>(mockMedications);
 
   const formatAge = (age: Age) => {
     const { year, month } = age;

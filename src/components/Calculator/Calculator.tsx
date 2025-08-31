@@ -62,14 +62,14 @@ export const Calculator = () => {
         name="Medication"
         options={getMedicationChoices()}
         value={medication}
-        setValue={(newMed: string) => setMedication((prev) => newMed)}
+        setValue={(newMed: string) => setMedication(newMed)}
       />
 
       <Select
         name="Indication"
         options={getIndicationChoices()}
         value={indication}
-        setValue={(newInd: string) => setIndication((prev) => newInd)}
+        setValue={(newInd: string) => setIndication(newInd)}
         disabled={!medication}
       />
 
@@ -97,7 +97,7 @@ export const Calculator = () => {
           type="number"
           value={weight.toString()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setWeight((prev) => Math.max(+e.target.value, 0))
+            setWeight(Math.max(+e.target.value, 0))
           }
         />
       </div>

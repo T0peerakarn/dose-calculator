@@ -24,7 +24,7 @@ export const calculateDose = (
   strengthMg?: number,
   volumeMl?: number
 ): DoseInfo => {
-  let doseInfo: DoseInfo = { ...usage.doseInfo };
+  const doseInfo: DoseInfo = { ...usage.doseInfo };
 
   // Check for kg
   if (doseInfo.doseUnit.includes("kg")) {

@@ -1,8 +1,8 @@
-interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
 }
 
-export function Input<T>({ name, ...props }: InputProps<T>) {
+export function Input({ name, ...props }: InputProps) {
   return (
     <div className="w-full flex flex-col">
       <label className="text-xs">{name}</label>
