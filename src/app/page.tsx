@@ -43,7 +43,7 @@ const HomePage = () => {
         setCurrentPageIdx={(newPageIdx: number) =>
           setCurrentPageIdx(newPageIdx)
         }
-        pages={pages}
+        pages={pages.map((p) => p.name)}
       />
     );
   };

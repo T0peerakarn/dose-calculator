@@ -1,10 +1,9 @@
-import type { Page } from "@/constants";
 import { Button } from "../common";
 
 interface NavigatorProps {
   currentPageIdx: number;
   setCurrentPageIdx: (newPageIdx: number) => void;
-  pages: Page[];
+  pages: string[];
 }
 
 export const Navigator = ({
@@ -18,7 +17,7 @@ export const Navigator = ({
         {pages.map((page, idx) => (
           <Button
             key={idx}
-            title={page.name}
+            title={page}
             onClick={() => setCurrentPageIdx(idx)}
             isToggle={currentPageIdx === idx}
           />
