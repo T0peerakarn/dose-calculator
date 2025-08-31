@@ -191,7 +191,7 @@ export const mockMedications: Medication[] = [
       },
       {
         indication: "Common cold",
-        regimen: "ทุุก 4 ชม ตามที่ต้องการ",
+        regimen: "ทุก 4 ชม ตามที่ต้องการ",
         ageRange: {
           lower: {
             year: 2,
@@ -210,7 +210,7 @@ export const mockMedications: Medication[] = [
       },
       {
         indication: "Common cold",
-        regimen: "ทุุก 4 ชม ตามที่ต้องการ",
+        regimen: "ทุก 4 ชม ตามที่ต้องการ",
         ageRange: {
           lower: {
             year: 6,

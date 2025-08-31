@@ -30,7 +30,7 @@ const HomePage = () => {
     const Component = pages[currentPageIdx].component;
 
     return (
-      <div className="w-full h-full flex flex-col gap-y-4">
+      <div className="w-full h-full flex flex-col gap-y-4 overflow-y-scroll">
         <Component />
       </div>
     );

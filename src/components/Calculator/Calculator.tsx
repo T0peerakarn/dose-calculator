@@ -151,10 +151,10 @@ export const Calculator = () => {
         <div className="border-2 rounded-lg px-4 py-2 flex flex-col gap-y-4">
           <h1 className="text-lg font-semibold">Dosage</h1>
           <div className="grid grid-cols-8 gap-y-4">
-            <p>Name</p>
+            <strong>Name:</strong>
             <p className="col-span-7 font-semibold">{result.name}</p>
 
-            <p>Medication info</p>
+            <strong>Medication info:</strong>
             <p className="col-span-7">
               {[
                 result.strengthMg && `ความแรง ${result.strengthMg} mg`,
@@ -165,7 +165,7 @@ export const Calculator = () => {
                 .join(", ")}
             </p>
 
-            <p>Dose info</p>
+            <strong>Dose info:</strong>
             <p className="col-span-7">
               {result.usage.doseInfo.doseLower} -{" "}
               {result.usage.doseInfo.doseUpper}{" "}
@@ -186,7 +186,7 @@ export const Calculator = () => {
 
             {calculatedMaxDoseUnit.length > 0 && (
               <>
-                <p>Max dose</p>
+                <strong>Max dose:</strong>
                 <p className="col-span-7">
                   {result.usage.maxDoseAmount}{" "}
                   {result.usage.maxDoseUnit!.join("/")}
@@ -197,7 +197,7 @@ export const Calculator = () => {
               </>
             )}
 
-            <p>Reference</p>
+            <strong>References:</strong>
             <div className="col-span-7 flex">
               {result.refs.map((ref, i) => (
                 <React.Fragment key={i}>
