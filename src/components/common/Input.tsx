@@ -7,8 +7,8 @@ export function Input({ name, ...props }: InputProps) {
     <div className="w-full flex flex-col">
       <label className="text-xs">{name}</label>
       <input
-        className={`border-2 rounded-lg p-2 ${
-          props.disabled ? "bg-gray-300" : ""
+        className={`border border-black rounded-lg p-2 ${
+          props.disabled ? "bg-gray-200" : ""
         } transition-all`}
         {...props}
       />

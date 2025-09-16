@@ -148,22 +148,11 @@ export const Calculator = () => {
     }
     return (
       <>
-        <div className="border-2 rounded-lg px-4 py-2 flex flex-col gap-y-4">
+        <div className="border border-black rounded-lg px-4 py-2 flex flex-col gap-y-4">
           <h1 className="text-lg font-semibold">Dosage</h1>
           <div className="grid grid-cols-8 gap-y-4">
             <strong>Name:</strong>
             <p className="col-span-7 font-semibold">{result.name}</p>
-
-            <strong>Medication info:</strong>
-            <p className="col-span-7">
-              {[
-                result.strengthMg && `ความแรง ${result.strengthMg} mg`,
-                result.volumeMl && `${result.volumeMl} ml`,
-                result.usage.regimen,
-              ]
-                .filter((x) => x)
-                .join(", ")}
-            </p>
 
             <strong>Dose info:</strong>
             <p className="col-span-7">
@@ -171,18 +160,22 @@ export const Calculator = () => {
               {result.usage.doseInfo.doseUpper}{" "}
               {result.usage.doseInfo.doseUnit.join("/")}
             </p>
-            <p className="col-start-2 col-span-7 font-semibold">
-              {result.calculatedDoseInfo.doseLower} -{" "}
-              {result.calculatedDoseInfo.doseUpper}{" "}
-              {result.calculatedDoseInfo.doseUnit.join("/")}
-              {calculatedMaxDoseAmount &&
-                calculatedMaxDoseAmount <
-                  result.calculatedDoseInfo.doseUpper && (
-                  <label className="ml-2 text-red-500 text-sm">
-                    (เกินขนาด max dose)
-                  </label>
-                )}
-            </p>
+            <div className="col-start-2 col-span-7">
+              <p className="font-bold text-lg bg-teal-100 w-fit p-2 border-1 rounded-lg">
+                {result.calculatedDoseInfo.doseLower} -{" "}
+                {result.calculatedDoseInfo.doseUpper}{" "}
+                {result.calculatedDoseInfo.doseUnit.join("/")}
+                {calculatedMaxDoseAmount &&
+                  calculatedMaxDoseAmount <
+                    result.calculatedDoseInfo.doseUpper && (
+                    <label className="ml-2 text-red-500 text-sm">
+                      (เกินขนาด max dose)
+                    </label>
+                  )}
+                {", "}
+                {result.usage.regimen}
+              </p>
+            </div>
 
             {calculatedMaxDoseUnit.length > 0 && (
               <>
