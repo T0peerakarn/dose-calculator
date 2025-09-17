@@ -1,12 +1,23 @@
-import { useState } from "react";
-import { mockMedications } from "@/constants";
-import { Input } from "../common";
-import { FaRegEdit } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { Input } from "@/components";
+import { deleteMedication, getAllMedications } from "@/utils/mongoose";
+import { PageProps } from "@/app/page";
 
-export const MedicineList = () => {
+export const MedicineList = ({ selectMedicationToEdit }: PageProps) => {
   const [search, setSearch] = useState<string>("");
-  const [medications, _setMedications] =
-    useState<Medication[]>(mockMedications);
+  const [medications, setMedications] = useState<
+    (Medication & { _id: string })[]
+  >([]);
+
+  const deleteHandler = async (id: string) => {
+    try {
+      await deleteMedication(id);
+      window.alert("ลบยาสำเร็จ กรุณา, refresh");
+    } catch (e) {
+      window.alert(e);
+    }
+  };
 
   const formatAge = (age: Age) => {
     const { year, month } = age;
@@ -36,7 +47,7 @@ export const MedicineList = () => {
             <th className="border px-4 py-2 text-left">Strength (mg)</th>
             <th className="border px-4 py-2 text-left">Volume (ml)</th>
             <th className="border px-4 py-2 text-left">References</th>
-            <th className="border px-4 py-2 text-left">Usage Details</th>
+            <th className="border px-4 py-2 text-left">Usage details</th>
           </tr>
         </thead>
         <tbody>
@@ -47,7 +58,18 @@ export const MedicineList = () => {
             .map((med, index) => (
               <tr key={index} className="align-top">
                 <td className="border px-4 py-2.5">
-                  <FaRegEdit />
+                  <div className="flex gap-2">
+                    <FaRegEdit
+                      size={20}
+                      className="cursor-pointer hover:scale-120 transition-all"
+                      onClick={() => selectMedicationToEdit(med._id)}
+                    />
+                    <FaRegTrashAlt
+                      size={20}
+                      className="cursor-pointer hover:scale-120 transition-all"
+                      onClick={() => deleteHandler(med._id)}
+                    />
+                  </div>
                 </td>
                 <td className="border px-4 py-2 font-semibold">{med.name}</td>
                 <td className="border px-4 py-2">
@@ -115,6 +137,15 @@ export const MedicineList = () => {
       </table>
     </div>
   );
+
+  useEffect(() => {
+    const fetchMedications = async () => {
+      const response = await getAllMedications();
+      setMedications(response);
+    };
+
+    fetchMedications();
+  }, []);
 
   return (
     <>

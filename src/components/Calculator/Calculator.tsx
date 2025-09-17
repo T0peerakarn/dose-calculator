@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { Button, Input, Select } from "@/components";
-import { mockMedications } from "@/constants";
-import { calculateDose, getUsageByAge } from "@/utils";
+import { calculateDose, getUsageByAge } from "@/utils/medication";
 import React from "react";
+import { getAllMedications } from "@/utils/mongoose";
 
 export const Calculator = () => {
+  const [medications, setMedications] = useState<Medication[]>([]);
   const [medication, setMedication] = useState<string>("");
   const [indication, setIndication] = useState<string>("");
   const [age, setAge] = useState<Age>({ year: 0, month: 0 });
@@ -19,13 +20,13 @@ export const Calculator = () => {
     weight === 0;
 
   const getMedicationChoices = () =>
-    mockMedications.map((m) => ({ value: m.name, label: m.name }));
+    medications.map((m) => ({ value: m.name, label: m.name }));
 
   const getIndicationChoices = () =>
     medication
       ? [
           ...new Set(
-            mockMedications
+            medications
               .find((m) => m.name == medication)!
               .usages.map((u) => u.indication)
           ),
@@ -33,9 +34,7 @@ export const Calculator = () => {
       : [];
 
   const handleDoseCalculate = () => {
-    const medObj: Medication = mockMedications.find(
-      (m) => m.name === medication
-    )!;
+    const medObj: Medication = medications.find((m) => m.name === medication)!;
     const usageObjs: MedicationUsage[] = medObj.usages.filter(
       (u) => u.indication === indication
     );
@@ -219,6 +218,15 @@ export const Calculator = () => {
     setIndication("");
     setResult(null);
   }, [medication]);
+
+  useEffect(() => {
+    const fetchMedications = async () => {
+      const response = await getAllMedications();
+      setMedications(response);
+    };
+
+    fetchMedications();
+  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Button } from "../common";
+import { Button } from "@/components";
 
 interface NavigatorProps {
   currentPageIdx: number;

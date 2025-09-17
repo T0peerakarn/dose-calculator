@@ -9,15 +9,27 @@ import {
   MedicineList,
 } from "@/components";
 
+export interface PageProps {
+  selectedId: string | null;
+  selectMedicationToEdit: (id: string) => void;
+}
+
 const HomePage = () => {
   const [currentPageIdx, setCurrentPageIdx] = useState<number>(0);
-  const pages = [
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const selectMedicationToEdit = (id: string) => {
+    setSelectedId(id);
+    setCurrentPageIdx(1);
+  };
+
+  const pages: { name: string; component: React.ComponentType<PageProps> }[] = [
     {
       name: "คำนวณขนาดยา",
       component: Calculator,
     },
     {
-      name: "ป้อนข้อมูลยาใหม่",
+      name: "ป้อนข้อมูลยาใหม่ / แก้ไขข้อมูลยา",
       component: AlterMedicine,
     },
     {
@@ -31,7 +43,10 @@ const HomePage = () => {
 
     return (
       <div className="w-full h-full flex flex-col gap-y-4 overflow-y-scroll">
-        <Component />
+        <Component
+          selectedId={selectedId}
+          selectMedicationToEdit={selectMedicationToEdit}
+        />
       </div>
     );
   };
