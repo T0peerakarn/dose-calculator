@@ -117,8 +117,10 @@ export const MedicineList = ({
                           {formatAge(usage.ageRange.upper)}
                         </p>
                         <p>
-                          <strong>Dose info:</strong> {usage.doseInfo.doseLower}{" "}
-                          - {usage.doseInfo.doseUpper}{" "}
+                          <strong>Dose info:</strong>{" "}
+                          {usage.doseInfo.doseLower === usage.doseInfo.doseUpper
+                            ? `${usage.doseInfo.doseLower} `
+                            : `${usage.doseInfo.doseLower} - ${usage.doseInfo.doseUpper} `}
                           {usage.doseInfo.doseUnit.join("/")}
                         </p>
                         {usage.maxDoseAmount && usage.maxDoseUnit && (

@@ -154,16 +154,20 @@ export const Calculator = ({ medications }: PageProps) => {
 
             <strong>Dose info:</strong>
             <p className="col-span-7">
-              {result.usage.doseInfo.doseLower} -{" "}
-              {result.usage.doseInfo.doseUpper}{" "}
+              {result.usage.doseInfo.doseLower ===
+              result.usage.doseInfo.doseUpper
+                ? `${result.usage.doseInfo.doseLower} `
+                : `${result.usage.doseInfo.doseLower} - ${result.usage.doseInfo.doseUpper} `}
               {result.usage.doseInfo.doseUnit.join("/")}
             </p>
             <div className="col-start-2 col-span-7">
               <p className="font-bold text-lg bg-teal-100 w-fit p-2 border-1 rounded-lg">
-                {result.calculatedDoseInfo.doseLower} -{" "}
-                {result.calculatedDoseInfo.doseUpper}{" "}
+                {result.calculatedDoseInfo.doseLower ===
+                result.calculatedDoseInfo.doseUpper
+                  ? `${result.calculatedDoseInfo.doseLower} `
+                  : `${result.calculatedDoseInfo.doseLower} - ${result.calculatedDoseInfo.doseUpper} `}
                 {result.calculatedDoseInfo.doseUnit.join("/")}
-                {calculatedMaxDoseAmount &&
+                {calculatedMaxDoseAmount > 0 &&
                   calculatedMaxDoseAmount <
                     result.calculatedDoseInfo.doseUpper && (
                     <label className="ml-2 text-red-500 text-sm">
@@ -178,35 +182,45 @@ export const Calculator = ({ medications }: PageProps) => {
             {calculatedMaxDoseUnit.length > 0 && (
               <>
                 <strong>Max dose:</strong>
-                <p className="col-span-7">
-                  {result.usage.maxDoseAmount}{" "}
-                  {result.usage.maxDoseUnit!.join("/")}
-                </p>
-                <p className="col-start-2 col-span-7 font-semibold">
-                  {calculatedMaxDoseAmount} {calculatedMaxDoseUnit.join("/")}
-                </p>
+                {calculatedMaxDoseAmount > 0 ? (
+                  <p className="col-span-7">
+                    {result.usage.maxDoseAmount}{" "}
+                    {result.usage.maxDoseUnit!.join("/")}
+                  </p>
+                ) : (
+                  <p className="col-span-7">-</p>
+                )}
+                {calculatedMaxDoseAmount > 0 && (
+                  <p className="col-start-2 col-span-7 font-semibold">
+                    {calculatedMaxDoseAmount} {calculatedMaxDoseUnit.join("/")}
+                  </p>
+                )}
               </>
             )}
 
             <strong>References:</strong>
-            <div className="col-span-7 flex">
-              {result.refs.map((ref, i) => (
-                <React.Fragment key={i}>
-                  {i > 0 && <p>,&nbsp;</p>}
-                  {ref.value ? (
-                    <a
-                      href={ref.value}
-                      target="_blank"
-                      className="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-all cursor-hover"
-                    >
-                      {ref.label}
-                    </a>
-                  ) : (
-                    <p>{ref.label}</p>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
+            {result.refs.length > 0 ? (
+              <div className="col-span-7 flex">
+                {result.refs.map((ref, i) => (
+                  <React.Fragment key={i}>
+                    {i > 0 && <p>,&nbsp;</p>}
+                    {ref.value ? (
+                      <a
+                        href={ref.value}
+                        target="_blank"
+                        className="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-all cursor-hover"
+                      >
+                        {ref.label}
+                      </a>
+                    ) : (
+                      <p>{ref.label}</p>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            ) : (
+              <p className="col-span-7 flex">-</p>
+            )}
           </div>
         </div>
       </>
