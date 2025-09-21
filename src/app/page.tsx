@@ -72,7 +72,11 @@ const HomePage = () => {
   useEffect(() => {
     const fetchMedications = async () => {
       const response = await getAllMedications();
-      setMedications(response);
+      setMedications(
+        response.sort((a: Medication, b: Medication) =>
+          a.name.localeCompare(b.name)
+        )
+      );
     };
 
     fetchMedications();
