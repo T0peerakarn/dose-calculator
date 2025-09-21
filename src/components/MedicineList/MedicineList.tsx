@@ -4,11 +4,11 @@ import { Input } from "@/components";
 import { deleteMedication, getAllMedications } from "@/utils/mongoose";
 import { PageProps } from "@/app/page";
 
-export const MedicineList = ({ selectMedicationToEdit }: PageProps) => {
+export const MedicineList = ({
+  medications,
+  selectMedicationToEdit,
+}: PageProps) => {
   const [search, setSearch] = useState<string>("");
-  const [medications, setMedications] = useState<
-    (Medication & { _id: string })[]
-  >([]);
 
   const deleteHandler = async (id: string) => {
     try {
@@ -137,15 +137,6 @@ export const MedicineList = ({ selectMedicationToEdit }: PageProps) => {
       </table>
     </div>
   );
-
-  useEffect(() => {
-    const fetchMedications = async () => {
-      const response = await getAllMedications();
-      setMedications(response);
-    };
-
-    fetchMedications();
-  }, []);
 
   return (
     <>

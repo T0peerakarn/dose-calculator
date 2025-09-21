@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { Button, Input, Select } from "@/components";
 import { calculateDose, getUsageByAge } from "@/utils/medication";
 import React from "react";
-import { getAllMedications } from "@/utils/mongoose";
+import { PageProps } from "@/app/page";
 
-export const Calculator = () => {
-  const [medications, setMedications] = useState<Medication[]>([]);
+export const Calculator = ({ medications }: PageProps) => {
   const [medication, setMedication] = useState<string>("");
   const [indication, setIndication] = useState<string>("");
   const [age, setAge] = useState<Age>({ year: 0, month: 0 });
@@ -218,15 +217,6 @@ export const Calculator = () => {
     setIndication("");
     setResult(null);
   }, [medication]);
-
-  useEffect(() => {
-    const fetchMedications = async () => {
-      const response = await getAllMedications();
-      setMedications(response);
-    };
-
-    fetchMedications();
-  }, []);
 
   return (
     <>

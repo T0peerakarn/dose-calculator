@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Navigator,
@@ -8,13 +8,18 @@ import {
   AlterMedicine,
   MedicineList,
 } from "@/components";
+import { getAllMedications } from "@/utils/mongoose";
 
 export interface PageProps {
+  medications: (Medication & { _id: string })[];
   selectedId: string | null;
   selectMedicationToEdit: (id: string) => void;
 }
 
 const HomePage = () => {
+  const [medications, setMedications] = useState<
+    (Medication & { _id: string })[]
+  >([]);
   const [currentPageIdx, setCurrentPageIdx] = useState<number>(0);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -44,6 +49,7 @@ const HomePage = () => {
     return (
       <div className="w-full h-full flex flex-col gap-y-4 overflow-y-scroll">
         <Component
+          medications={medications}
           selectedId={selectedId}
           selectMedicationToEdit={selectMedicationToEdit}
         />
@@ -62,6 +68,15 @@ const HomePage = () => {
       />
     );
   };
+
+  useEffect(() => {
+    const fetchMedications = async () => {
+      const response = await getAllMedications();
+      setMedications(response);
+    };
+
+    fetchMedications();
+  }, []);
 
   return (
     <div className="w-screen h-screen flex flex-col px-8 py-8 gap-y-8">
