@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { Input } from "@/components";
-import { deleteMedication, getAllMedications } from "@/utils/mongoose";
+import { deleteMedication } from "@/utils/mongoose";
 import { PageProps } from "@/app/page";
 
 export const MedicineList = ({
