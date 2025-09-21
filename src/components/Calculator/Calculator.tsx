@@ -160,6 +160,20 @@ export const Calculator = ({ medications }: PageProps) => {
                 : `${result.usage.doseInfo.doseLower} - ${result.usage.doseInfo.doseUpper} `}
               {result.usage.doseInfo.doseUnit.join("/")}
             </p>
+            {result.usage.doseInfo.doseUnit.includes("mg") &&
+              result.usage.doseInfo.doseUnit.includes("kg") && (
+                <p className="col-start-2 col-span-7">
+                  {result.usage.doseInfo.doseLower ===
+                  result.usage.doseInfo.doseUpper
+                    ? `${result.usage.doseInfo.doseLower * weight} `
+                    : `${result.usage.doseInfo.doseLower * weight} - ${
+                        result.usage.doseInfo.doseUpper * weight
+                      } `}
+                  {result.usage.doseInfo.doseUnit
+                    .filter((u) => u !== "kg")
+                    .join("/")}
+                </p>
+              )}
             <div className="col-start-2 col-span-7">
               <p className="font-bold text-lg bg-teal-100 w-fit p-2 border-1 rounded-lg">
                 {result.calculatedDoseInfo.doseLower ===
