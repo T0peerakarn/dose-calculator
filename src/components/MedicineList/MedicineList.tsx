@@ -22,9 +22,9 @@ export const MedicineList = ({
   const formatAge = (age: Age) => {
     const { year, month } = age;
     if (month !== undefined) {
-      return `${year}y ${month}m`;
+      return `${year}yr. ${month}mo.`;
     }
-    return `${year}y`;
+    return `${year}yr.`;
   };
 
   const renderSearchBox = () => (
