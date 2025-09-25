@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Button, Input, Select } from "@/components";
-import { calculateDose, getUsageByAge } from "@/utils/medication";
+import { calculateDose, getUsageByAge, toNDecimalPlaces } from "@/utils/medication";
 import React from "react";
 import { PageProps } from "@/app/page";
 
@@ -178,8 +178,8 @@ export const Calculator = ({ medications }: PageProps) => {
               <p className="font-bold text-lg bg-teal-100 w-fit p-2 border-1 rounded-lg">
                 {result.calculatedDoseInfo.doseLower ===
                 result.calculatedDoseInfo.doseUpper
-                  ? `${result.calculatedDoseInfo.doseLower} `
-                  : `${result.calculatedDoseInfo.doseLower} - ${result.calculatedDoseInfo.doseUpper} `}
+                  ? `${toNDecimalPlaces(result.calculatedDoseInfo.doseLower)} `
+                  : `${toNDecimalPlaces(result.calculatedDoseInfo.doseLower)} - ${toNDecimalPlaces(result.calculatedDoseInfo.doseUpper)} `}
                 {result.calculatedDoseInfo.doseUnit.join("/")}
                 {calculatedMaxDoseAmount > 0 &&
                   calculatedMaxDoseAmount <
@@ -206,7 +206,7 @@ export const Calculator = ({ medications }: PageProps) => {
                 )}
                 {calculatedMaxDoseAmount > 0 && (
                   <p className="col-start-2 col-span-7 font-semibold">
-                    {calculatedMaxDoseAmount} {calculatedMaxDoseUnit.join("/")}
+                    {toNDecimalPlaces(calculatedMaxDoseAmount)} {calculatedMaxDoseUnit.join("/")}
                   </p>
                 )}
               </>

@@ -53,3 +53,5 @@ export const calculateDose = (
 
   return doseInfo;
 };
+
+export const toNDecimalPlaces = (num: number, n: number = 2) => (Math.round(num * 100) / 100).toFixed(n)
