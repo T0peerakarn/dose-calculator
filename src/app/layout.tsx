@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dose Calculator",
+  title: "CMU PedCal",
 };
 
 export default function RootLayout({
